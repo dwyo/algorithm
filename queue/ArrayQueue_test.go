@@ -1,6 +1,8 @@
 package queue
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestArrayQueue_New(t *testing.T) {
 	Q := new(ArrayQueue)
@@ -10,7 +12,41 @@ func TestArrayQueue_New(t *testing.T) {
 }
 
 func TestArrayQueue_Enqueue(t *testing.T) {
-	//Q := new(ArrayQueue)
-	//Q.Enqueue()
+	Q := new(ArrayQueue)
+	var a int32 = 10
+	Q.Enqueue(a)
+}
 
+func TestArrayQueue_Enqueue1(t *testing.T) {
+	Q := new(ArrayQueue)
+	for i := 0; i < 20; i++ {
+		Q.Enqueue(int32(i))
+	}
+	if Q.len != 20 {
+		t.Error("队列长队错误")
+	}
+}
+
+func TestArrayQueue_Dequeue(t *testing.T) {
+	Q := new(ArrayQueue)
+	for i := 0; i < 20; i++ {
+		Q.Enqueue(int32(i))
+	}
+	var value int32
+	for j := 0; j < 20; j++ {
+		value = Q.Dequeue()
+		if value != int32(j) {
+			t.Error("取出值不匹配")
+		}
+	}
+}
+
+func TestArrayQueue_Front(t *testing.T) {
+	Q := new(ArrayQueue)
+	for i := 0; i < 20; i++ {
+		Q.Enqueue(int32(i))
+	}
+	if Q.Front() != Q.Dequeue() {
+		t.Error("Front方法错误")
+	}
 }
