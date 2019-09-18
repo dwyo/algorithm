@@ -6,7 +6,7 @@ import (
 )
 
 type ArrayQueue struct {
-	item []int32
+	item []interface{}
 	lock sync.RWMutex
 	len  int32
 }
@@ -15,7 +15,6 @@ type ArrayQueue struct {
 创建新的数组队列
 */
 func (q *ArrayQueue) New() *ArrayQueue {
-	q.item = []int32{}
 	q.len = 0
 	return q
 }
@@ -37,7 +36,7 @@ func (q *ArrayQueue) Size() int32 {
 /**
 入队
 */
-func (q *ArrayQueue) Enqueue(e int32) {
+func (q *ArrayQueue) Enqueue(e interface{}) {
 	q.lock.Lock()
 	q.item = append(q.item, e)
 	q.len++
@@ -47,7 +46,7 @@ func (q *ArrayQueue) Enqueue(e int32) {
 /**
 出队
 */
-func (q *ArrayQueue) Dequeue() int32 {
+func (q *ArrayQueue) Dequeue() interface{} {
 	q.lock.Lock()
 	item := q.item[0:1]
 	q.item = q.item[1:q.len]
@@ -56,12 +55,18 @@ func (q *ArrayQueue) Dequeue() int32 {
 	return item[0]
 }
 
+/**
+打印队列
+ */
 func (q *ArrayQueue) Print() {
 	for idx, value := range q.item {
 		fmt.Println(idx, value)
 	}
 }
 
-func (q *ArrayQueue) Front() int32 {
+/**
+获取首位元素
+ */
+func (q *ArrayQueue) Front() interface{} {
 	return q.item[0]
 }

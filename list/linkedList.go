@@ -92,6 +92,7 @@ func (l *List)Del(idx int) bool {
 	}
 	cur.next.next.pre = cur
 	cur.next = cur.next.next
+	l.len--
 	return true
 }
 
