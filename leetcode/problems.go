@@ -2,6 +2,7 @@ package leetcode
 
 import (
 	"container/list"
+	"math"
 )
 
 /**
@@ -44,7 +45,7 @@ func twoSum1(nums []int, target int) []int {
 /**
 时间复杂度 O(n)，以空间换时间
 临界条件判断, 差值等于当前值时不符合要求
- */
+*/
 func twoSum2(nums []int, target int) []int {
 	var tempMap = make(map[int]int, len(nums))
 	for i, v := range nums {
@@ -72,9 +73,9 @@ func twoSum2(nums []int, target int) []int {
   输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
   输出：7 -> 0 -> 8
   原因：342 + 465 = 807
- */
+*/
 
-func addTwoNumbers(l1 *list.List, l2 *list.List) *list.List{
+func addTwoNumbers(l1 *list.List, l2 *list.List) *list.List {
 	// todo list
 
 	return nil
@@ -85,4 +86,78 @@ func lengthOfLongestSubstring(s string) int {
 	// 1。 将字符串放入一个map里面，
 
 	return 0
+}
+
+/**
+给定一个二进制数组， 计算其中最大连续1的个数。
+
+示例 1:
+
+输入: [1,1,0,1,1,1]
+输出: 3
+解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/max-consecutive-ones
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+*/
+func findMaxConsecutiveOnes(nums []int) int {
+	var cnt float64 = 0
+	var max float64 = 0
+
+	for i := 0; i < len(nums); i++ {
+		if nums[i] == 1 {
+			cnt++
+		} else {
+			cnt = 0
+		}
+		max = math.Max(cnt, max)
+	}
+	return int(max)
+}
+
+/**
+在《英雄联盟》的世界中，有一个叫 “提莫” 的英雄，他的攻击可以让敌方英雄艾希（编者注：寒冰射手）进入中毒状态。现在，给出提莫对艾希的攻击时间序列和提莫攻击的中毒持续时间，你需要输出艾希的中毒状态总时长。
+
+你可以认为提莫在给定的时间点进行攻击，并立即使艾希处于中毒状态。
+
+ 
+示例1:
+
+输入: [1,4], 2
+输出: 4
+原因: 第 1 秒初，提莫开始对艾希进行攻击并使其立即中毒。中毒状态会维持 2 秒钟，直到第 2 秒末结束。
+第 4 秒初，提莫再次攻击艾希，使得艾希获得另外 2 秒中毒时间。
+所以最终输出 4 秒。
+示例2:
+
+输入: [1,2], 2
+输出: 3
+原因: 第 1 秒初，提莫开始对艾希进行攻击并使其立即中毒。中毒状态会维持 2 秒钟，直到第 2 秒末结束。
+但是第 2 秒初，提莫再次攻击了已经处于中毒状态的艾希。
+由于中毒状态不可叠加，提莫在第 2 秒初的这次攻击会在第 3 秒末结束。
+所以最终输出 3 。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/teemo-attacking
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+*/
+func findPoisonedDuration(timeSeries []int, duration int) int {
+	length := len(timeSeries)
+	if length == 0 {
+		return 0
+	}
+	if length == 1 {
+		return duration
+	}
+	time := 0
+	for i:=0; i < length - 1; i++ {
+		diff := timeSeries[i+1] - timeSeries[i]
+		if diff >= duration {
+			time += duration
+		} else {
+			time += diff
+		}
+	}
+	return time + duration
 }

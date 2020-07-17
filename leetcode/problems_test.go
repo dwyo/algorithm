@@ -51,3 +51,20 @@ func TestProblems_lengthOfLongestSubstring(t *testing.T) {
 	str3 := "pwwkew"
 	fmt.Println("str3: ", str3)
 }
+
+func TestProblems_findMaxConsecutiveOnes(t *testing.T){
+	arr1 := []int{1,1,0,1,1,1}
+	n := findMaxConsecutiveOnes(arr1)
+	fmt.Println(n)
+}
+
+func TestProblems_findPoisonedDuration(t *testing.T){
+	arr1 := []int{1,4}
+	arr2 := []int{1,2}
+	arr3 := []int{1,2,3,4,5}
+	d1 := 2
+	d2 := 5
+	fmt.Println(findPoisonedDuration(arr1, d1))
+	fmt.Println(findPoisonedDuration(arr2, d1))
+	fmt.Println(findPoisonedDuration(arr3, d2))
+}
