@@ -27,7 +27,7 @@ func pivotIndex(nums []int) int {
 
 func pivotIndex2(nums []int) int {
 	sum := 0
-	for i, _ := range nums {
+	for i := range nums {
 		sum += nums[i]
 	}
 	tmp := 0

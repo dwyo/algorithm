@@ -1,7 +1,6 @@
 package leetcode
 
 import (
-	"container/list"
 	"math"
 )
 
@@ -53,7 +52,7 @@ func twoSum2(nums []int, target int) []int {
 	}
 	for i, val := range nums {
 		temp := target - val
-		idx, ok := tempMap[temp];
+		idx, ok := tempMap[temp]
 		if ok {
 			if idx == i {
 				continue
@@ -64,7 +63,13 @@ func twoSum2(nums []int, target int) []int {
 	return nil
 }
 
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
 /**
+两数相加
 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
@@ -73,12 +78,48 @@ func twoSum2(nums []int, target int) []int {
   输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
   输出：7 -> 0 -> 8
   原因：342 + 465 = 807
+
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
 */
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	var res *ListNode
+	var head *ListNode
+	flag := 0
+	for l1 != nil || l2 != nil {
+		var sum int
+		if l1 != nil {
+			sum += l1.Val
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			sum += l2.Val
+			l2 = l2.Next
+		}
+		if flag != 0 {
+			sum += 1
+			flag = 0
+		}
+		if sum > 9 {
+			sum %= 10
+			flag = 1
+		}
+		if res == nil {
+			res = &ListNode{Val: sum}
+			head = res
+		} else {
+			head.Next = &ListNode{Val: sum}
+			head = head.Next
+		}
 
-func addTwoNumbers(l1 *list.List, l2 *list.List) *list.List {
-	// todo list
-
-	return nil
+	}
+	if flag != 0 {
+		head.Val = 1
+	}
+	return res
 }
 
 func lengthOfLongestSubstring(s string) int {
@@ -121,7 +162,7 @@ func findMaxConsecutiveOnes(nums []int) int {
 
 你可以认为提莫在给定的时间点进行攻击，并立即使艾希处于中毒状态。
 
- 
+
 示例1:
 
 输入: [1,4], 2
@@ -151,7 +192,7 @@ func findPoisonedDuration(timeSeries []int, duration int) int {
 		return duration
 	}
 	time := 0
-	for i:=0; i < length - 1; i++ {
+	for i := 0; i < length-1; i++ {
 		diff := timeSeries[i+1] - timeSeries[i]
 		if diff >= duration {
 			time += duration

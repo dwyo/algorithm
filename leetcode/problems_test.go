@@ -43,6 +43,19 @@ func TestProblems_twoSum2_2(t *testing.T) {
 	}
 }
 
+func TestProblems_addTwoNumbers(t *testing.T) {
+	fNode3 := &ListNode{Val: 3, Next: nil}
+	fNode2 := &ListNode{Val: 4, Next: fNode3}
+	fNode := &ListNode{Val: 2, Next: fNode2}
+
+	sNode3 := &ListNode{Val: 4, Next: nil}
+	sNode2 := &ListNode{Val: 6, Next: sNode3}
+	sNode := &ListNode{Val: 5, Next: sNode2}
+
+	resNode := addTwoNumbers(fNode, sNode)
+	fmt.Println("resNode: ", resNode)
+}
+
 func TestProblems_lengthOfLongestSubstring(t *testing.T) {
 	str1 := "abcabcbb"
 	fmt.Println("str1: ", str1)
@@ -52,16 +65,16 @@ func TestProblems_lengthOfLongestSubstring(t *testing.T) {
 	fmt.Println("str3: ", str3)
 }
 
-func TestProblems_findMaxConsecutiveOnes(t *testing.T){
-	arr1 := []int{1,1,0,1,1,1}
+func TestProblems_findMaxConsecutiveOnes(t *testing.T) {
+	arr1 := []int{1, 1, 0, 1, 1, 1}
 	n := findMaxConsecutiveOnes(arr1)
 	fmt.Println(n)
 }
 
-func TestProblems_findPoisonedDuration(t *testing.T){
-	arr1 := []int{1,4}
-	arr2 := []int{1,2}
-	arr3 := []int{1,2,3,4,5}
+func TestProblems_findPoisonedDuration(t *testing.T) {
+	arr1 := []int{1, 4}
+	arr2 := []int{1, 2}
+	arr3 := []int{1, 2, 3, 4, 5}
 	d1 := 2
 	d2 := 5
 	fmt.Println(findPoisonedDuration(arr1, d1))
