@@ -57,12 +57,19 @@ func TestProblems_addTwoNumbers(t *testing.T) {
 }
 
 func TestProblems_lengthOfLongestSubstring(t *testing.T) {
-	str1 := "abcabcbb"
-	fmt.Println("str1: ", str1)
+	// str1 := "abcabcbb"
+	// len1 := lengthOfLongestSubstring(str1)
+	// fmt.Println("len1: ", len1)
+
 	str2 := "bbbbb"
-	fmt.Println("str2: ", str2)
-	str3 := "pwwkew"
-	fmt.Println("str3: ", str3)
+	len2 := lengthOfLongestSubstring(str2)
+	fmt.Println("len2: ", len2)
+
+	// fmt.Println("au len:", lengthOfLongestSubstring("au"))
+
+	// str3 := "pwwkew"
+	// len3 := lengthOfLongestSubstring(str3)
+	// fmt.Println("len3: ", len3)
 }
 
 func TestProblems_findMaxConsecutiveOnes(t *testing.T) {

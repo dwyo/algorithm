@@ -63,6 +63,9 @@ func twoSum2(nums []int, target int) []int {
 	return nil
 }
 
+/**
+ListNode from leetcode
+*/
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -117,16 +120,43 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	}
 	if flag != 0 {
-		head.Val = 1
+		head.Next = &ListNode{Val: 1}
 	}
 	return res
 }
 
+/**
+无重复字符的最长子串
+	给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+示例 1:
+	输入: "abcabcbb"
+	输出: 3
+	解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+*/
 func lengthOfLongestSubstring(s string) int {
-
-	// 1。 将字符串放入一个map里面，
-
-	return 0
+	sLen := len(s)
+	if sLen < 2 {
+		return sLen
+	}
+	maxLen := 1
+	for i := 0; i < sLen; i++ {
+		hMap := make(map[string]int)
+		hMap[s[i:i+1]] = 1
+		len := 1
+		nextS := s[i+1:]
+		for j := range nextS {
+			_, ok := hMap[nextS[j:j+1]]
+			if ok {
+				break
+			}
+			hMap[nextS[j:j+1]] = 1
+			len++
+			if maxLen < len {
+				maxLen = len
+			}
+		}
+	}
+	return maxLen
 }
 
 /**
@@ -138,9 +168,7 @@ func lengthOfLongestSubstring(s string) int {
 输出: 3
 解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.
 
-来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/max-consecutive-ones
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 func findMaxConsecutiveOnes(nums []int) int {
 	var cnt float64 = 0
