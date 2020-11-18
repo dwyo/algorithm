@@ -36,3 +36,13 @@ func TestQuestion_pivotIndex2(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestQuestion_canCompleteCircuit(t *testing.T) {
+	gas := []int{1, 2, 3, 4, 5}
+	cost := []int{3, 4, 5, 1, 2}
+	idx := canCompleteCircuit(gas, cost)
+	if idx != 3 {
+		fmt.Println("idx: ", idx)
+		t.Fail()
+	}
+}
