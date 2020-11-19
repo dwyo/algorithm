@@ -46,3 +46,11 @@ func TestQuestion_canCompleteCircuit(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestQuestion_moveZeroes(t *testing.T) {
+	nums := []int{0, 1, 0, 3, 12}
+	moveZeroes(nums)
+	for _, a := range nums {
+		fmt.Println("value: ", a)
+	}
+}
