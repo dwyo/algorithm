@@ -88,3 +88,9 @@ func TestProblems_findPoisonedDuration(t *testing.T) {
 	fmt.Println(findPoisonedDuration(arr2, d1))
 	fmt.Println(findPoisonedDuration(arr3, d2))
 }
+
+func TestProblems_findRepeatNumber(t *testing.T) {
+	nums := []int{2, 3, 1, 0, 2, 5, 3}
+	num := findRepeatNumber(nums)
+	fmt.Println(num)
+}
