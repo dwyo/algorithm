@@ -256,6 +256,18 @@ func findRepeatNumber(nums []int) int {
 	return -1
 }
 
+func findRepeatNumber2(nums []int) int {
+	for i := 0; i < len(nums); i++ {
+		for nums[i] != i {
+			if nums[nums[i]] == nums[i] {
+				return nums[i]
+			}
+			nums[i], nums[nums[i]] = nums[nums[i]], nums[i]
+		}
+	}
+	return -1
+}
+
 /*
 三个数的最大乘积
 */

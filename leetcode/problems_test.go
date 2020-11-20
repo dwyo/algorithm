@@ -94,3 +94,9 @@ func TestProblems_findRepeatNumber(t *testing.T) {
 	num := findRepeatNumber(nums)
 	fmt.Println(num)
 }
+
+func TestProblems_findRepeatNumber2(t *testing.T) {
+	nums := []int{2, 3, 1, 0, 2, 5, 3}
+	num := findRepeatNumber2(nums)
+	fmt.Println(num)
+}
