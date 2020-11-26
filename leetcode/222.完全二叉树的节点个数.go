@@ -45,6 +45,12 @@ package leetcode
  *     Right *TreeNode
  * }
  */
+
+type TreeNode struct {
+	Val int
+	Left *TreeNode
+	Right *TreeNode
+}
 func countNodes(root *TreeNode) int {
 	if root == nil {
 		return 0
