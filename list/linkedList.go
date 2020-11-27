@@ -58,7 +58,7 @@ func (l *List) AppendNode(e *Element, idx int) bool {
 }
 
 // @Summary 从头开始遍历节点
-func (l *List) Each()  {
+func (l *List) Each() {
 	if l.len == 0 {
 		return
 	}
@@ -82,12 +82,12 @@ func (l *List) Reversion() {
 }
 
 // @Summary 删除一个节点
-func (l *List)Del(idx int) bool {
+func (l *List) Del(idx int) bool {
 	if l.len < idx {
 		return false
 	}
 	cur := l.head
-	for i:= 0; i < idx - 1; i++{
+	for i := 0; i < idx-1; i++ {
 		cur = cur.next
 	}
 	cur.next.next.pre = cur
@@ -105,5 +105,3 @@ func (l *List) GetLen() int {
 func (l *List) IsEmpty() bool {
 	return l.len == 0
 }
-
-

@@ -1,8 +1,8 @@
 package leetcode
 
 import (
-	"container/list"
 	"math"
+	"sort"
 )
 
 /**
@@ -53,7 +53,7 @@ func twoSum2(nums []int, target int) []int {
 	}
 	for i, val := range nums {
 		temp := target - val
-		idx, ok := tempMap[temp];
+		idx, ok := tempMap[temp]
 		if ok {
 			if idx == i {
 				continue
@@ -65,6 +65,15 @@ func twoSum2(nums []int, target int) []int {
 }
 
 /**
+ListNode from leetcode
+*/
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+/**
+两数相加
 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
@@ -73,19 +82,82 @@ func twoSum2(nums []int, target int) []int {
   输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
   输出：7 -> 0 -> 8
   原因：342 + 465 = 807
+
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
 */
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	var res *ListNode
+	var head *ListNode
+	flag := 0
+	for l1 != nil || l2 != nil {
+		var sum int
+		if l1 != nil {
+			sum += l1.Val
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			sum += l2.Val
+			l2 = l2.Next
+		}
+		if flag != 0 {
+			sum += 1
+			flag = 0
+		}
+		if sum > 9 {
+			sum %= 10
+			flag = 1
+		}
+		if res == nil {
+			res = &ListNode{Val: sum}
+			head = res
+		} else {
+			head.Next = &ListNode{Val: sum}
+			head = head.Next
+		}
 
-func addTwoNumbers(l1 *list.List, l2 *list.List) *list.List {
-	// todo list
-
-	return nil
+	}
+	if flag != 0 {
+		head.Next = &ListNode{Val: 1}
+	}
+	return res
 }
 
+/**
+无重复字符的最长子串
+	给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+示例 1:
+	输入: "abcabcbb"
+	输出: 3
+	解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+*/
 func lengthOfLongestSubstring(s string) int {
-
-	// 1。 将字符串放入一个map里面，
-
-	return 0
+	sLen := len(s)
+	if sLen < 2 {
+		return sLen
+	}
+	maxLen := 1
+	for i := 0; i < sLen; i++ {
+		hMap := make(map[string]int)
+		hMap[s[i:i+1]] = 1
+		len := 1
+		nextS := s[i+1:]
+		for j := range nextS {
+			_, ok := hMap[nextS[j:j+1]]
+			if ok {
+				break
+			}
+			hMap[nextS[j:j+1]] = 1
+			len++
+			if maxLen < len {
+				maxLen = len
+			}
+		}
+	}
+	return maxLen
 }
 
 /**
@@ -97,9 +169,7 @@ func lengthOfLongestSubstring(s string) int {
 输出: 3
 解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.
 
-来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/max-consecutive-ones
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 func findMaxConsecutiveOnes(nums []int) int {
 	var cnt float64 = 0
@@ -121,7 +191,7 @@ func findMaxConsecutiveOnes(nums []int) int {
 
 你可以认为提莫在给定的时间点进行攻击，并立即使艾希处于中毒状态。
 
- 
+
 示例1:
 
 输入: [1,4], 2
@@ -151,7 +221,7 @@ func findPoisonedDuration(timeSeries []int, duration int) int {
 		return duration
 	}
 	time := 0
-	for i:=0; i < length - 1; i++ {
+	for i := 0; i < length-1; i++ {
 		diff := timeSeries[i+1] - timeSeries[i]
 		if diff >= duration {
 			time += duration
@@ -160,4 +230,63 @@ func findPoisonedDuration(timeSeries []int, duration int) int {
 		}
 	}
 	return time + duration
+}
+
+/*
+找出数组中重复的数字。
+
+在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。
+数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。
+请找出数组中任意一个重复的数字。
+
+链接：https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof
+示例 1：
+	输入：
+	[2, 3, 1, 0, 2, 5, 3]
+	输出：2 或 3
+*/
+func findRepeatNumber(nums []int) int {
+	numMap := make(map[int]int)
+	for _, num := range nums {
+		if numMap[num] > 0 {
+			return num
+		}
+		numMap[num] = 1
+	}
+	return -1
+}
+
+func findRepeatNumber2(nums []int) int {
+	for i := 0; i < len(nums); i++ {
+		for nums[i] != i {
+			if nums[nums[i]] == nums[i] {
+				return nums[i]
+			}
+			nums[i], nums[nums[i]] = nums[nums[i]], nums[i]
+		}
+	}
+	return -1
+}
+
+/*
+三个数的最大乘积
+*/
+func maximumProduct(nums []int) int {
+	sort.Ints(nums)
+	length := len(nums)
+	maxArr := nums[length-3:]
+	maxArr2 := nums[0:3]
+	maxRes := 0
+	res1 := maxArr[0] * maxArr[1] * maxArr[2]
+	res2 := maxArr2[0] * maxArr2[1] * maxArr2[2]
+	res3 := maxArr2[0] * maxArr2[1] * maxArr[2]
+
+	maxRes = res2
+	if res1 > res2 {
+		maxRes = res1
+	}
+	if res3 > maxRes {
+		maxRes = res3
+	}
+	return maxRes
 }
