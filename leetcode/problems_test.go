@@ -100,3 +100,9 @@ func TestProblems_findRepeatNumber2(t *testing.T) {
 	num := findRepeatNumber2(nums)
 	fmt.Println(num)
 }
+
+func TestProblems_largestPerimeter(t *testing.T) {
+	s := []int{1, 2, 1}
+	l := largestPerimeter(s)
+	fmt.Println(l)
+}
