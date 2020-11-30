@@ -5,12 +5,12 @@ import (
 	"testing"
 )
 
-func TestProblems_reverse(t *testing.T) {
+func TestProblems_reverseStr(t *testing.T) {
 	str := "hello"
-	var reverseStr = "olleh"
+	var rStr = "olleh"
 	var data []byte = []byte(str)
-	s := reverse(data)
-	if string(s) != reverseStr {
+	s := reverseStr(data)
+	if string(s) != rStr {
 		t.Error("测试不通过")
 	}
 }

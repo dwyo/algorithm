@@ -2,13 +2,12 @@ package leetcode
 
 import (
 	"math"
-	"sort"
 )
 
 /**
 递归反转字符串
 */
-func reverse(s []byte) []byte {
+func reverseStr(s []byte) []byte {
 	if s == nil {
 		return s
 	}
@@ -19,7 +18,7 @@ func reverse(s []byte) []byte {
 		return s
 	}
 	s[0], s[len(s)-1] = s[len(s)-1], s[0]
-	reverse(s[1 : len(s)-1])
+	reverseStr(s[1 : len(s)-1])
 	return s
 }
 
@@ -271,22 +270,22 @@ func findRepeatNumber2(nums []int) int {
 /*
 三个数的最大乘积
 */
-func maximumProduct(nums []int) int {
-	sort.Ints(nums)
-	length := len(nums)
-	maxArr := nums[length-3:]
-	maxArr2 := nums[0:3]
-	maxRes := 0
-	res1 := maxArr[0] * maxArr[1] * maxArr[2]
-	res2 := maxArr2[0] * maxArr2[1] * maxArr2[2]
-	res3 := maxArr2[0] * maxArr2[1] * maxArr[2]
+// func maximumProduct(nums []int) int {
+// 	sort.Ints(nums)
+// 	length := len(nums)
+// 	maxArr := nums[length-3:]
+// 	maxArr2 := nums[0:3]
+// 	maxRes := 0
+// 	res1 := maxArr[0] * maxArr[1] * maxArr[2]
+// 	res2 := maxArr2[0] * maxArr2[1] * maxArr2[2]
+// 	res3 := maxArr2[0] * maxArr2[1] * maxArr[2]
 
-	maxRes = res2
-	if res1 > res2 {
-		maxRes = res1
-	}
-	if res3 > maxRes {
-		maxRes = res3
-	}
-	return maxRes
-}
+// 	maxRes = res2
+// 	if res1 > res2 {
+// 		maxRes = res1
+// 	}
+// 	if res3 > maxRes {
+// 		maxRes = res3
+// 	}
+// 	return maxRes
+// }
