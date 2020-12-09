@@ -54,3 +54,17 @@ func TestQuestion_moveZeroes(t *testing.T) {
 		fmt.Println("value: ", a)
 	}
 }
+
+func TestQuestion_countPrimes(t *testing.T) {
+	cnt1 := countPrimes(1500000)
+	fmt.Println("cnt1: ", cnt1)
+}
+
+func TestQuestion_matrixScore(t *testing.T) {
+	// A := [][]int{{0, 0, 1, 1}, {1, 0, 1, 0}, {1, 1, 0, 0}}
+	// A := [][]int{{0}, {1}}
+	// A := [][]int{{0, 1}, {1, 1}}
+	A := [][]int{{0, 1, 1}, {1, 1, 1}, {0, 1, 0}}
+	sum := matrixScore(A)
+	fmt.Println(sum)
+}

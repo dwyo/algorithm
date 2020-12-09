@@ -8,7 +8,7 @@ import (
 /**
 递归反转字符串
 */
-func reverse(s []byte) []byte {
+func reverseStr(s []byte) []byte {
 	if s == nil {
 		return s
 	}
@@ -19,7 +19,7 @@ func reverse(s []byte) []byte {
 		return s
 	}
 	s[0], s[len(s)-1] = s[len(s)-1], s[0]
-	reverse(s[1 : len(s)-1])
+	reverseStr(s[1 : len(s)-1])
 	return s
 }
 
@@ -271,22 +271,67 @@ func findRepeatNumber2(nums []int) int {
 /*
 三个数的最大乘积
 */
-func maximumProduct(nums []int) int {
-	sort.Ints(nums)
-	length := len(nums)
-	maxArr := nums[length-3:]
-	maxArr2 := nums[0:3]
-	maxRes := 0
-	res1 := maxArr[0] * maxArr[1] * maxArr[2]
-	res2 := maxArr2[0] * maxArr2[1] * maxArr2[2]
-	res3 := maxArr2[0] * maxArr2[1] * maxArr[2]
+// func maximumProduct(nums []int) int {
+// 	sort.Ints(nums)
+// 	length := len(nums)
+// 	maxArr := nums[length-3:]
+// 	maxArr2 := nums[0:3]
+// 	maxRes := 0
+// 	res1 := maxArr[0] * maxArr[1] * maxArr[2]
+// 	res2 := maxArr2[0] * maxArr2[1] * maxArr2[2]
+// 	res3 := maxArr2[0] * maxArr2[1] * maxArr[2]
 
-	maxRes = res2
-	if res1 > res2 {
-		maxRes = res1
+// 	maxRes = res2
+// 	if res1 > res2 {
+// 		maxRes = res1
+// 	}
+// 	if res3 > maxRes {
+// 		maxRes = res3
+// 	}
+// 	return maxRes
+// }
+
+/*
+三角形的最大周长
+给定由一些正数（代表长度）组成的数组 A，返回由其中三个长度组成的、面积不为零的三角形的最大周长。
+
+如果不能形成任何面积不为零的三角形，返回 0。
+
+
+
+示例 1：
+
+输入：[2,1,2]
+输出：5
+示例 2：
+
+输入：[1,2,1]
+输出：0
+示例 3：
+
+输入：[3,2,3,4]
+输出：10
+示例 4：
+
+输入：[3,6,2,3]
+输出：8
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/largest-perimeter-triangle
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+*/
+func largestPerimeter(A []int) int {
+	n := len(A)
+	if n < 3 {
+		return 0
 	}
-	if res3 > maxRes {
-		maxRes = res3
+	sort.Ints(A)
+	for i := n - 1; i >= 2; i-- {
+		l := A[i] < A[i-1]+A[i-2]
+		if l {
+			return A[i] + A[i-1] + A[i-2]
+		}
 	}
-	return maxRes
+	return 0
+
 }
