@@ -68,3 +68,10 @@ func TestQuestion_matrixScore(t *testing.T) {
 	sum := matrixScore(A)
 	fmt.Println(sum)
 }
+
+func TestQuestion_wiggleMaxLength(t *testing.T) {
+	nums := []int{1, 7, 4, 9, 2, 5}
+
+	ret := wiggleMaxLength(nums)
+	fmt.Println(ret)
+}
