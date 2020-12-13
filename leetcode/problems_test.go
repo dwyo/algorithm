@@ -106,3 +106,11 @@ func TestProblems_largestPerimeter(t *testing.T) {
 	l := largestPerimeter(s)
 	fmt.Println(l)
 }
+
+func TestProblems_containsDuplicate(t *testing.T) {
+	nums := []int{1, 2, 3, 1}
+	ret := containsDuplicate(nums)
+	if ret == false {
+		t.Error("错误")
+	}
+}

@@ -335,3 +335,15 @@ func largestPerimeter(A []int) int {
 	return 0
 
 }
+
+func containsDuplicate(nums []int) bool {
+	ret := make(map[int]int, len(nums))
+	for _, num := range nums {
+		ret[num]++
+		if ret[num] > 1 {
+			return true
+		}
+	}
+	return false
+}
+
