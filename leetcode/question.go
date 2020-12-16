@@ -2,6 +2,7 @@ package leetcode
 
 import (
 	"fmt"
+	"strings"
 )
 
 /*
@@ -276,15 +277,15 @@ func matrixScore(A [][]int) int {
 
 func wiggleMaxLength(nums []int) int {
 	n := len(nums)
-	if (n < 2) {
+	if n < 2 {
 		return n
 	}
 	up, down := 1, 1
 	for i := 1; i < n; i++ {
-		if nums[i] > nums[i - 1] {
+		if nums[i] > nums[i-1] {
 			up = down + 1
 		}
-		if nums[i] < nums[i - 1] {
+		if nums[i] < nums[i-1] {
 			down = up + 1
 		}
 	}
@@ -292,4 +293,22 @@ func wiggleMaxLength(nums []int) int {
 		return up
 	}
 	return down
+}
+
+func wordPattern(pattern string, s string) bool {
+	words := strings.Split(s, " ")
+	word2ch := map[string]byte{}
+	ch2word := map[byte]string{}
+	if len(pattern) != len(words) {
+		return false
+	}
+	for i, word := range words {
+		ch := pattern[i]
+		if word2ch[word] > 0 && word2ch[word] != ch || ch2word[ch] != "" && ch2word[ch] != word {
+			return false
+		}
+		ch2word[ch] = word
+		word2ch[word] = ch
+	}
+	return true
 }

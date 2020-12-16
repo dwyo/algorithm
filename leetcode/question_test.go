@@ -75,3 +75,10 @@ func TestQuestion_wiggleMaxLength(t *testing.T) {
 	ret := wiggleMaxLength(nums)
 	fmt.Println(ret)
 }
+
+func TestQuestion_wordPattern(t *testing.T) {
+	pattern := "abba"
+	str := "dog cat cat dog"
+	res := wordPattern(pattern, str)
+	fmt.Println(res)
+}
