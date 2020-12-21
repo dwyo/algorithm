@@ -1,5 +1,14 @@
 package leetcode
 
+/**
+二叉树节点
+*/
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 /*
  * @lc app=leetcode.cn id=222 lang=golang
  *
@@ -45,12 +54,6 @@ package leetcode
  *     Right *TreeNode
  * }
  */
-
-type TreeNode struct {
-	Val int
-	Left *TreeNode
-	Right *TreeNode
-}
 func countNodes(root *TreeNode) int {
 	if root == nil {
 		return 0
