@@ -65,34 +65,40 @@ func findContentChildren(g []int, s []int) int {
 	sort.Ints(g)
 	sort.Ints(s)
 
+	// // 排序后，第一个符合条件的就是最小符合条件，满足条件后，饼干就没有了
+
 	// 解法 1
-	// ans := 0
-	// for _, v := range g {
-	// 	for j, vv := range s {
-	// 		if v <= vv {
-	// 			ans++
-	// 			// 排序后，第一个符合条件的就是最小符合条件，满足条件后，饼干就没有了
-	// 			s = append(s[:j], s[j+1:]...)
-	// 			break
-	// 		}
-	// 	}
-	// }
-	// return ans
+	ans := 0
+	j := 0
+	for _, v := range g {
+		if len(s) == 0 {
+			return ans
+		}
+		for j < len(s) {
+			if v <= s[j] {
+				ans++
+				j++
+				break
+			}
+			j++
+		}
+	}
+	return ans
 
 	// 解法 2
-	i := 0
-	j := 0
-	ng := len(g)
-	ns := len(s)
-	for i < ng && j < ns {
-		if g[i] <= s[j] {
-			i++
-		}
-		// 饼干只可以用一次，因为饼干如果小的话，就是无法满足被抛弃，满足的话就是被用了
-		// 当前饼干大小，无法满足排序后 这个孩子的胃口，那么后面所有孩子的胃口都不能被满足，所以遗弃
-		j++
-	}
-	return i
+	// i := 0
+	// j := 0
+	// ng := len(g)
+	// ns := len(s)
+	// for i < ng && j < ns {
+	// 	if g[i] <= s[j] {
+	// 		i++
+	// 	}
+	// 	// 饼干只可以用一次，因为饼干如果小的话，就是无法满足被抛弃，满足的话就是被用了
+	// 	// 当前饼干大小，无法满足排序后 这个孩子的胃口，那么后面所有孩子的胃口都不能被满足，所以遗弃
+	// 	j++
+	// }
+	// return i
 }
 
 // @lc code=end
