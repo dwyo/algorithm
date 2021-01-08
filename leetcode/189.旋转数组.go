@@ -1,7 +1,5 @@
 package leetcode
 
-import "fmt"
-
 /*
  * @lc app=leetcode.cn id=189 lang=golang
  *
@@ -65,24 +63,15 @@ func rotate(nums []int, k int) {
 	reverse "<--" 		we can get "--><-----"
 	reverse "<-----" 	we can get "-->----->"
 	*/
-
-	var reverse func(int, int)
-	reverse = func(start, end int) {
-		temp := nums[end]
-		for j := end; j > start; j-- {
-			nums[j] = nums[j-1]
-			fmt.Println(nums)
-		}
-		nums[start] = temp
+	k %= len(nums)
+	reverse(nums)
+	reverse(nums[:k])
+	reverse(nums[k:])
+}
+func reverse(a []int) {
+	for i, n := 0, len(a); i < n/2; i++ {
+		a[i], a[n-1-i] = a[n-1-i], a[i]
 	}
-
-	n := len(nums)
-	reverse(0, n-1)
-	fmt.Println(nums)
-	// reverse(0, k-1)
-	// fmt.Println(nums)
-	// reverse(k, n-1)
-	// fmt.Println(nums)
 }
 
 // @lc code=end
