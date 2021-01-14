@@ -79,18 +79,3 @@ func inorderTraversal(root *TreeNode) []int {
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
-// 递归法
-func inorderTraversal(root *TreeNode) []int {
-	ret := []int{}
-	var inorder func(node *TreeNode)
-	inorder = func(node *TreeNode) {
-		if node == nil {
-			return
-		}
-		inorder(node.Left)
-		ret = append(ret, node.Val)
-		inorder(node.Right)
-	}
-	inorder(root)
-	return ret
-}
