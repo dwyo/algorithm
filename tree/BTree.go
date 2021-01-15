@@ -10,7 +10,6 @@ type BTree struct {
 
 func (t *BTree) add(val int) {
 
-
 }
 
 func (t *BTree) Find(needle int) *BTree {
@@ -37,12 +36,40 @@ func (t *BTree) Remove(needle int) bool {
 	return true
 }
 
-func (t *BTree) Preorder(root *BTree)  {
+/**
+前序遍历
+ */
+func (t *BTree) Preorder(root *BTree) {
 	if root == nil {
 		return
 	}
 	fmt.Println(root.Val)
 	t.Preorder(root.Left)
 	t.Preorder(root.Right)
-
+}
+/**
+层序遍历
+ */
+func (t *BTree) LevelOrder(root *BTree) []int {
+	if root == nil {
+		return []int{}
+	}
+	ret := make([]int, 0)
+	queue := []*BTree{root}
+	for len(queue) > 0 {
+		n := len(queue)
+		for n > 0 {
+			n--
+			node := queue[0]
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+			}
+			ret = append(ret, node.Val)
+			queue = queue[1:]
+		}
+	}
+	return ret
 }

@@ -24,7 +24,8 @@ func initBTree() *BTree{
 
 func TestBTree_New(t *testing.T){
 	btree := initBTree()
-	btree.Preorder(btree)
+	//btree.Preorder(btree)
+	btree.LevelOrder(btree)
 }
 
 
