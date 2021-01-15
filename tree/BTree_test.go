@@ -1,6 +1,7 @@
 package tree
 
 import (
+	"github.com/davecgh/go-spew/spew"
 	"testing"
 )
 
@@ -23,9 +24,18 @@ func initBTree() *BTree{
 }
 
 func TestBTree_New(t *testing.T){
-	btree := initBTree()
+	//btree := initBTree()
 	//btree.Preorder(btree)
-	btree.LevelOrder(btree)
+	//btree.LevelOrder(btree)
+
+	preorder := []int{3,9,20,15,7}
+	inorder := []int{9,3,15,20,7}
+	//postorder := []int{9,15,7,20,3}
+
+	btree := &BTree{}
+	tree := btree.BuildTree(preorder, inorder)
+	//tree := btree.BuildTree(inorder, postorder)
+	spew.Dump(tree)
 }
 
 

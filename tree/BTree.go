@@ -38,7 +38,7 @@ func (t *BTree) Remove(needle int) bool {
 
 /**
 前序遍历
- */
+*/
 func (t *BTree) Preorder(root *BTree) {
 	if root == nil {
 		return
@@ -47,9 +47,28 @@ func (t *BTree) Preorder(root *BTree) {
 	t.Preorder(root.Left)
 	t.Preorder(root.Right)
 }
+
+func (t *BTree) Inorder(root *BTree) {
+	if root == nil {
+		return
+	}
+	t.Inorder(root.Left)
+	fmt.Println(root.Val)
+	t.Inorder(root.Right)
+}
+
+func (t *BTree) Postorder(root *BTree) {
+	if root == nil {
+		return
+	}
+	t.Postorder(root.Left)
+	fmt.Println(root.Val)
+	t.Postorder(root.Right)
+}
+
 /**
 层序遍历
- */
+*/
 func (t *BTree) LevelOrder(root *BTree) []int {
 	if root == nil {
 		return []int{}
@@ -72,4 +91,22 @@ func (t *BTree) LevelOrder(root *BTree) []int {
 		}
 	}
 	return ret
+}
+
+func (t *BTree) BuildTree(preorder []int, inorder []int) *BTree {
+	if len(preorder) == 0 {
+		return nil
+	}
+	root := &BTree{preorder[0], nil, nil}
+	i := 0
+	// 找到中序遍历的根节点位置
+	for ; i < len(inorder); i++ {
+		if inorder[i] == preorder[0] {
+			break
+		}
+	}
+	p := preorder[1:len(inorder[:i])+1]
+	root.Left = t.BuildTree(p, inorder[:i])
+	root.Right = t.BuildTree(preorder[len(inorder[:i])+1:], inorder[i+1:])
+	return root
 }
