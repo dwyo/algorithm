@@ -26,16 +26,20 @@ package leetcode
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func calculate(s string) int {
-	x, y := 1, 0
-	for _, ch := range s {
-		if ch == 'A' {
-			x = 2*x + y
-		}
-		if ch == 'B' {
-			y = 2*y + x
-		}
-	}
-	return x + y
+	return 1 << len(s)
 }
+
+//func calculate(s string) int {
+//	x, y := 1, 0
+//	for _, ch := range s {
+//		if ch == 'A' {
+//			x = 2*x + y
+//		}
+//		if ch == 'B' {
+//			y = 2*y + x
+//		}
+//	}
+//	return x + y
+//}
 
 //leetcode submit region end(Prohibit modification and deletion)
