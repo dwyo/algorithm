@@ -38,5 +38,10 @@ func TestBTree_New(t *testing.T){
 	spew.Dump(tree)
 }
 
+func TestBTree_BuildTree(t *testing.T) {
+	preorder := []int{3,9,20,15,7}
+	tree := BuildBinaryTree(0, preorder)
+	spew.Dump(tree)
+}
 
 
