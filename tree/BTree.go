@@ -8,8 +8,19 @@ type BTree struct {
 	Right *BTree
 }
 
-func (t *BTree) add(val int) {
+func (t *BTree) add(num int) {
 
+}
+
+func BuildBinaryTree(i int, nums []int) *BTree {
+	t := &BTree{nums[i], nil, nil}
+	if i < len(nums) && 2*i+1 < len(nums) {
+		t.Left = BuildBinaryTree(2*i+1, nums)
+	}
+	if i < len(nums) && 2*i+2 < len(nums) {
+		t.Right = BuildBinaryTree(2*i+2, nums)
+	}
+	return t
 }
 
 func (t *BTree) Find(needle int) *BTree {
@@ -105,7 +116,7 @@ func (t *BTree) BuildTree(preorder []int, inorder []int) *BTree {
 			break
 		}
 	}
-	p := preorder[1:len(inorder[:i])+1]
+	p := preorder[1 : len(inorder[:i])+1]
 	root.Left = t.BuildTree(p, inorder[:i])
 	root.Right = t.BuildTree(preorder[len(inorder[:i])+1:], inorder[i+1:])
 	return root
