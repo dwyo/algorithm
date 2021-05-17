@@ -312,3 +312,117 @@ func wordPattern(pattern string, s string) bool {
 	}
 	return true
 }
+/*
+int 转罗马数字
+*/
+func intToRoman(num int) string {
+	var roman = []struct {
+		value  int
+		symbol string
+	}{
+		{1000, "M"},
+		{900, "CM"},
+		{500, "D"},
+		{400, "CD"},
+		{100, "C"},
+		{90, "XC"},
+		{50, "L"},
+		{40, "XL"},
+		{10, "X"},
+		{9, "IX"},
+		{5, "V"},
+		{4, "IV"},
+		{1, "I"},
+	}
+	ans := []byte{}
+	for _, v := range roman {
+		// fmt.Println(v.value, v.symbol)
+		for num >= v.value {
+			num -= v.value
+			ans = append(ans, v.symbol...)
+		}
+		if num == 0 {
+			break
+		}
+	}
+	return string(ans)
+}
+
+/*
+993 二叉树的堂兄弟节点
+*/
+func isCousins(root *TreeNode, x int, y int) bool {
+	var xpar int
+	var xdep int
+	var ypar int
+	var ydep int
+
+	var dfs func(node *TreeNode, dep, p int)
+
+	dfs = func(node *TreeNode, dep, p int) {
+		if node == nil {
+			return
+		}
+		if node.Val == x {
+			xpar = p
+			xdep = dep
+		} else if node.Val == y {
+			ydep = dep
+			ypar = p
+		} else {
+			dfs(node.Left, dep+1, node.Val)
+			dfs(node.Right, dep+1, node.Val)
+		}
+	}
+	dfs(root.Left, 1, root.Val)
+	dfs(root.Right, 1, root.Val)
+	return xpar != ypar && xdep == ydep
+}
+
+/*
+4. 寻找两个正序数组的中位数
+*/
+func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+	mlen := len(nums1)
+	nlen := len(nums2)
+
+	temp := []int{}
+
+	var merge func(large, small []int)
+
+	merge = func(large, small []int) {
+		i, j := 0, 0
+		for i < mlen && j < nlen {
+			if nums1[i] <= nums2[j] {
+				temp = append(temp, nums1[i])
+				i += 1
+			} else {
+				temp = append(temp, nums2[j])
+				j += 1
+			}
+		}
+		if i < mlen {
+			temp = append(temp, nums1[i:]...)
+		}
+		if j <= nlen {
+			temp = append(temp, nums2[j:]...)
+		}
+	}
+
+	if mlen > nlen {
+		merge(nums1, nums2)
+	} else {
+		merge(nums2, nums2)
+	}
+
+	ans := 0.0
+	t := mlen + nlen
+	if t%2 == 0 {
+		mid := float64((temp[t/2] + temp[t/2-1]))
+		ans = mid / float64(2)
+	} else {
+		ans = float64(temp[t/2])
+	}
+	return ans
+}
+
